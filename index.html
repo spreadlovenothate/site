@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spread Love, Not Hate</title>
 
-  <!-- META PIXEL CODE -->
+  <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,63 +15,581 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'DEINE_PIXEL_ID');
+  fbq('init', '2156226811876358');
   fbq('track', 'PageView');
   </script>
-  <!-- END META PIXEL CODE -->
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2156226811876358&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:       #1a1a2e;
+      --bg-soft:  #16213e;
+      --pink:     #e8a0bf;
+      --pink-dim: #c4799f;
+      --text:     #f0f0f0;
+      --muted:    #a0a0b8;
+      --border:   rgba(232, 160, 191, 0.2);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Georgia', serif;
-      background: #1a1a2e;
-      color: #f0f0f0;
+      font-family: 'Lato', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(26, 26, 46, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--pink);
+      letter-spacing: 0.02em;
+    }
+
+    .header-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── HERO ── */
+    .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 40px 20px;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
     }
-    .container { max-width: 680px; }
-    h1 {
-      font-size: 2.8rem;
-      color: #e8a0bf;
-      margin-bottom: 24px;
-      line-height: 1.2;
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 60%, rgba(232,160,191,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 70% 30%, rgba(100,80,160,0.1) 0%, transparent 60%);
     }
-    p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #cccccc;
-      margin-bottom: 20px;
+
+    .hero-inner {
+      position: relative;
+      max-width: 760px;
     }
-    .quote {
-      font-size: 1.5rem;
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.18;
+      color: var(--text);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero h1 em {
       font-style: italic;
-      color: #ffffff;
-      border-left: 4px solid #e8a0bf;
-      padding-left: 20px;
-      margin: 40px 0;
-      text-align: left;
+      color: var(--pink);
     }
-    .footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #888;
+
+    .hero-body {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--pink);
+      margin: 36px auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+      border-top: 1px solid var(--border);
+    }
+
+    .section.reverse { direction: rtl; }
+    .section.reverse > * { direction: ltr; }
+
+    .section-image {
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    .section-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+      filter: brightness(0.75) saturate(0.9);
+    }
+
+    .section-image:hover img { transform: scale(1.03); }
+
+    .section-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,26,46,0.3) 0%, transparent 60%);
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+      background: var(--bg-soft);
+    }
+
+    .section-number {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink-dim);
+      margin-bottom: 24px;
+    }
+
+    .section-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .section-content h2 em {
+      color: var(--pink);
+      font-style: italic;
+    }
+
+    .section-content p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .accent-line {
+      width: 36px;
+      height: 2px;
+      background: var(--pink);
+      margin: 28px 0;
+    }
+
+    /* ── FULL-BLEED SECTION (section 4) ── */
+    .section-fullbleed {
+      position: relative;
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-fullbleed img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35) saturate(0.7);
+    }
+
+    .section-fullbleed-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 80px 32px;
+    }
+
+    .section-fullbleed-content .section-number {
+      color: var(--pink);
+    }
+
+    .section-fullbleed-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    .section-fullbleed-content p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(240,240,240,0.82);
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .about-image {
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: brightness(0.8) saturate(0.85);
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--bg) 100%);
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+    }
+
+    .about-content .section-number { color: var(--pink-dim); }
+
+    .about-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .about-names {
+      margin-top: 8px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--pink);
+      font-size: 1rem;
+    }
+
+    /* ── QUOTE BREAK ── */
+    .quote-break {
+      padding: 100px 32px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft);
+    }
+
+    .quote-break blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .quote-break blockquote::before {
+      content: '\201C';
+      font-size: 6rem;
+      color: var(--pink);
+      opacity: 0.3;
+      position: absolute;
+      top: -40px;
+      left: -20px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 60px 48px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--pink);
+      margin-bottom: 16px;
+    }
+
+    .footer-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(24px); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header { padding: 18px 24px; }
+
+      .section,
+      .section.reverse,
+      .about {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+
+      .section.reverse > * { direction: ltr; }
+
+      .section-image,
+      .about-image { min-height: 320px; }
+
+      .section-content,
+      .about-content { padding: 52px 28px; }
+
+      .about-image::after { background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%); }
+    }
+
+    @media (max-width: 600px) {
+      .section-content,
+      .about-content { padding: 40px 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Spread Love, Not Hate.</h1>
-    <p>The world has enough outrage. Enough division. Enough of treating strangers like enemies.</p>
-    <div class="quote">
-      "You don't have to agree with everyone. You just have to remember they're human."
+
+  <!-- HEADER -->
+  <header>
+    <span class="logo">Spread Love, Not Hate</span>
+    <span class="header-tag">A community for humans</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">A small rebellion against the noise</p>
+      <h1>A little less hate.<br><em>A little more human.</em></h1>
+      <div class="divider"></div>
+      <p class="hero-body">Most people are actually pretty decent. We just don't see it that way anymore — because outrage gets clicks and the algorithm loves a fight. This page is our small rebellion. No politics. No drama. Just daily reminders that empathy still exists.</p>
     </div>
-    <p>This is a small corner of the internet dedicated to one simple idea: a kinder world starts with one person at a time.</p>
-    <p>That person can be you. Today.</p>
-    <div class="footer">Spread Love, Not Hate &mdash; est. 2025</div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section">
+    <div class="section-image reveal">
+      <img
+        src="crowd.jpg"
+        alt="Crowd of people"
+        loading="lazy"
+      />
+    </div>
+    <div class="section-content reveal">
+      <span class="section-number">01 &nbsp;/&nbsp; We need to talk</span>
+      <h2>We need to talk about how much we <em>hate</em> each other.</h2>
+      <div class="accent-line"></div>
+      <p>Scroll through any comment section. Watch the news for 10 minutes. Read the replies under any opinion someone shares online. We've become really, really good at hating people we've never met. Different politics. Different beliefs. Different lifestyles. That's all it takes now.</p>
+      <br>
+      <p>This page exists to push back against that — not with more arguments, not with "our side vs. their side." Just with one simple reminder: the person on the other side of the screen is still a person. You don't have to agree with them. You just have to remember they're human.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section reverse">
+    <div class="section-image reveal">
+      <img
+        src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=80"
+        alt="Hands together showing diversity"
+        loading="lazy"
+      />
+    </div>
+    <div class="section-content reveal">
+      <span class="section-number">02 &nbsp;/&nbsp; Common ground</span>
+      <h2>We're not as <em>divided</em> as we think.</h2>
+      <div class="accent-line"></div>
+      <p>Most people want the same things. Safety. Respect. A fair shot. We just forgot how to talk to each other. The headlines show the loudest voices. They're rarely the most common ones.</p>
+      <br>
+      <p>Start small. Listen first.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — FULL BLEED -->
+  <section class="section-fullbleed">
+    <img
+      src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=1600&q=80"
+      alt="Crowded city street at night"
+      loading="lazy"
+    />
+    <div class="section-fullbleed-content reveal">
+      <span class="section-number">03 &nbsp;/&nbsp; A choice</span>
+      <h2>Hate travels faster than kindness.<br><em>That ends with us.</em></h2>
+      <div class="accent-line" style="margin: 28px auto;"></div>
+      <p>The algorithm rewards outrage. It always has. Anger keeps people scrolling, and scrolling keeps the lights on. Every share, every reaction, every comment is a small vote for the kind of internet — and the kind of world — we all have to live in. That's not a small thing. Most of the noise online isn't coming from most people. It's coming from the loudest ones. The rest of us have been quiet for too long. The next thing you share is a choice. Make it count.</p>
+    </div>
+  </section>
+
+  <!-- QUOTE BREAK -->
+  <div class="quote-break">
+    <blockquote class="reveal">
+      You don't have to agree with everyone. You just have to remember they're human.
+    </blockquote>
   </div>
+
+  <!-- SECTION 5 -->
+  <section class="section">
+    <div class="section-image reveal">
+      <img
+        src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=80"
+        alt="Two people having a calm conversation"
+        loading="lazy"
+      />
+    </div>
+    <div class="section-content reveal">
+      <span class="section-number">04 &nbsp;/&nbsp; Disagreement</span>
+      <h2>You can <em>disagree</em> without destroying.</h2>
+      <div class="accent-line"></div>
+      <p>Disagreement is healthy. It's how ideas get better, how societies move forward, how we figure out what actually matters. But there's a line — and we cross it constantly without noticing.</p>
+      <br>
+      <p>Disagreeing with someone's ideas is fair. Deciding they're a bad person because of those ideas is something else entirely. The moment we stop seeing the human behind the opinion, we've already lost the argument — and something more important than that.</p>
+      <br>
+      <p>You don't have to like everyone. You don't have to agree. You just have to remember they're human. That's it. That's the whole message.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="section reverse">
+    <div class="section-image reveal">
+      <img
+        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80"
+        alt="People together in warm light"
+        loading="lazy"
+      />
+    </div>
+    <div class="section-content reveal">
+      <span class="section-number">05 &nbsp;/&nbsp; Practice</span>
+      <h2>Tolerance isn't weakness. It's the <em>hardest thing</em> you'll ever practice.</h2>
+      <div class="accent-line"></div>
+      <p>It's easy to be kind to people who are like you. It's easy to be patient with people who agree with you. Real tolerance — the kind that actually means something — is choosing to treat someone with dignity even when you think they're wrong. Even when they've been unkind first. Even when everything online is telling you they're the enemy.</p>
+      <br>
+      <p>Every day we choose what to amplify. A comment, a share, a reaction. Those choices add up. You don't have to agree with someone to treat them like a person. Start there. See what happens.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about">
+    <div class="about-image reveal">
+      <!-- Replace src with your generated image path, e.g. src="about.jpg" -->
+      <img
+        src="sarah_julia.png"
+        alt="Sarah and Julia, founders"
+        loading="lazy"
+      />
+    </div>
+    <div class="about-content reveal">
+      <span class="section-number">Who we are</span>
+      <h2>Two friends who got tired of the <em>noise</em>.</h2>
+      <div class="accent-line"></div>
+      <p>We've been friends for over 15 years. And somewhere along the way, we both noticed the same thing: the world online started feeling meaner. Louder. More exhausting.</p>
+      <p>We're not activists. We're not politicians. We're just two people who believe the world is a little better when we treat each other like humans. So we made this page. Not to change the world — just to be a small corner of it that feels a little more human.</p>
+      <p>We're glad you're here.</p>
+      <span class="about-names">— Sarah &amp; Julia</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-tagline">Hate is loud. Love is stronger.</p>
+    <p class="footer-sub">Spread Love, Not Hate &mdash; est. 2025</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
